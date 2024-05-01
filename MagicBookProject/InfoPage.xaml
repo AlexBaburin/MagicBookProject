@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MagicBookProject.InfoPage"
+             Title="InfoPage"
+             xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
+             x:DataType="viewmodel:InfoViewModel">
+    <Grid RowDefinitions="200, auto, auto, auto, auto, auto, auto"
+      Padding="10"
+      RowSpacing="30">
+        
+        <Label Grid.Row="0" 
+            Text="Авторы"
+            FontSize="40"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            TextColor="White"
+            BackgroundColor="Navy"/>
+
+        <Label Grid.Row="1" 
+            Text="Абрамов Данила"
+            FontSize="20"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"/>
+
+        <Label Grid.Row="2" 
+            Text="Лагутин Денис"
+            FontSize="20"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"/>
+
+        <Label Grid.Row="3" 
+            Text="Сафонов Роман"
+            FontSize="20"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"/> 
+
+        <Label Grid.Row="4" 
+            Text="Бабурин Александр"
+            FontSize="20"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"/>
+
+        <Label Grid.Row="5" 
+            Text="Кулиш Даниил"
+            FontSize="20"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"/>
+
+        <Button Text="Назад"
+                Grid.Row="6"
+                FontAttributes="Bold">
+            <Button.GestureRecognizers>
+                <TapGestureRecognizer
+                Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:InfoViewModel}}, Path=GoBackCommand} "/>
+            </Button.GestureRecognizers>
+        </Button>
+    </Grid>
+</ContentPage>

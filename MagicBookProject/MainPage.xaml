@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MagicBookProject.MainPage"
+             xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
+             x:DataType="viewmodel:MainViewModel">
+
+    <Grid RowDefinitions="200, 100, auto, auto, auto"
+          Padding="10"
+          RowSpacing="10">
+        
+        <Image Source="icon.png"/>
+
+        <Label Grid.Row="1" 
+               Text="Magic Book"
+               FontSize="40"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"/>
+
+        <Button Text="Играть"
+                Grid.Row="2"
+                FontAttributes="Bold">
+                
+                
+        </Button>
+
+        <Button Text="Настройки"
+                Grid.Row="3"
+                FontAttributes="Bold">
+            <Button.GestureRecognizers>
+                <TapGestureRecognizer
+                Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapSettingsCommand} "/>
+            </Button.GestureRecognizers>
+        </Button>
+        
+        <Button Text="Об авторах"
+                Grid.Row="4"
+                FontAttributes="Bold">
+            <Button.GestureRecognizers>
+                <TapGestureRecognizer
+                Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapInfoCommand} "/>
+            </Button.GestureRecognizers>
+        </Button>
+
+    </Grid>
+
+</ContentPage>
