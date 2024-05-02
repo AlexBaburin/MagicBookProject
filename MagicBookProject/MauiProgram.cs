@@ -28,6 +28,9 @@ namespace MagicBookProject
             builder.Services.AddTransient<SettingsPage>();
             builder.Services.AddTransient<SettingsViewModel>();
 
+            builder.Services.AddTransient<PlayPage>();
+            builder.Services.AddTransient<PlayViewModel>();
+
             return builder.Build();
         }
     }

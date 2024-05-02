@@ -19,4 +19,10 @@ public partial class MainViewModel : ObservableObject
         await Shell.Current.GoToAsync(nameof(SettingsPage));
         Vibration.Vibrate(100);
     }
+    [RelayCommand]
+    async Task TapPlay()
+    {
+        await Shell.Current.GoToAsync(nameof(PlayPage));
+        Vibration.Vibrate(100);
+    }
 }
