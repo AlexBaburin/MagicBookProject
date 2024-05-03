@@ -7,8 +7,22 @@
              x:DataType="viewmodel:SettingsViewModel">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Основные настройки игры:"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"/>
+        <Label
+            Text="Громкость:"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Padding="30"
+            />
+        <Slider
+            x:Name="Volume"
+            Minimum="0"
+            Maximum="100"
+            ValueChanged="Slider_ValueChanged"
+            MaximumWidthRequest="300"
+            />
     </VerticalStackLayout>
 </ContentPage>
