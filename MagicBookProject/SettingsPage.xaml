@@ -21,6 +21,7 @@
             x:Name="Volume"
             Minimum="0"
             Maximum="100"
+            Value="50"
             ValueChanged="Slider_ValueChanged"
             MaximumWidthRequest="300"
             />

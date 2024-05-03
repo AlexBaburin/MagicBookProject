@@ -5,7 +5,7 @@ namespace MagicBookProject
     public partial class MainPage : ContentPage
     {
         private IAudioManager audioManager;
-        private IAudioPlayer player;
+        public static IAudioPlayer player;
 
         public MainPage(MainViewModel vm, IAudioManager audioManager)
         {
@@ -18,6 +18,7 @@ namespace MagicBookProject
         {
             player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("test.mp3"));
             player.Loop = true;
+            player.Volume = 0.5;
             player.Play();
         }
     }
