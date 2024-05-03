@@ -11,7 +11,7 @@ public partial class PlayPage : ContentPage
 	}
 	private async void AnimatedText(Label text)
 	{
-		string downloadText = "Я тот самый человек, который лицезрел мироздания во время величия хаоса на Земле";
+		string downloadText = "Я тот самый человек, который лицезрел мирозданиe во время величия хаоса на Земле";
 		text.Text = string.Empty;
 		foreach(char c in downloadText)
 		{
