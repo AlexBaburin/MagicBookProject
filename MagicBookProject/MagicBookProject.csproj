@@ -68,7 +68,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\anime_girl.jpg" />
+	  <None Remove="Resources\Images\anime_girl.png" />
+	  <None Remove="Resources\Images\background_location.png" />
+	  <None Remove="Resources\Images\bgl.png" />
 	  <None Remove="Resources\Images\Icon.png" />
 	  <None Remove="Resources\Images\Image1.png" />
 	  <None Remove="Resources\Images\new_panel.png" />

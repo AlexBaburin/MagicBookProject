@@ -5,12 +5,20 @@
              Title="Альтушка для Демидова"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:PlayViewModel">
-    <Grid VerticalOptions="End">
-        <Image Source="new_panel.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnImageTapped"/>
-            </Image.GestureRecognizers>
-        </Image>
-        <Label x:Name="MainText" FontSize="18" Text="My text" Padding="5,5,5,5" Margin="10,40,0,0" VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="Red" />
+    <Grid >
+        <Grid VerticalOptions="Center">
+            <Image Source="bgl.png" ScaleY="1" ScaleX="1"/>
+        </Grid>
+        <Grid VerticalOptions="Center">
+            <Image Source="anime_girl.png" Scale="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0, 0, 0, 0"/>
+        </Grid>
+        <Grid VerticalOptions="End">
+            <Image Source="new_panel.png" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnImageTapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label x:Name="MainText" FontSize="18" Text="My text" Padding="5,5,5,5" Margin="10,40,0,0" VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="Red" />
+        </Grid>
     </Grid>
 </ContentPage>
