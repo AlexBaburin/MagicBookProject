@@ -17,7 +17,8 @@
                Text="Magic Book"
                FontSize="40"
                FontAttributes="Bold"
-               HorizontalTextAlignment="Center"/>
+               HorizontalTextAlignment="Center"
+               TextColor="White"/>
 
             <Button Text="Играть"
                 Grid.Row="2"

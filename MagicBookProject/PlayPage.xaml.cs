@@ -110,6 +110,16 @@ public partial class PlayPage : ContentPage
     }
     BinaryTree TreeStory = new BinaryTree();
     bool lever = true;
+    public static int storyIndex = 0;
+
+    public async void WriteTextToFile(string text, string targetFileName)
+    {
+        // Write the file content to the app data directory  
+        string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, targetFileName);
+        using FileStream outputStream = System.IO.File.OpenWrite(targetFile);
+        using StreamWriter streamWriter = new StreamWriter(outputStream);
+        await streamWriter.WriteAsync(text);
+    }
 
     public async Task<string> ReadTextFile(string filePath)
     {
@@ -153,11 +163,44 @@ public partial class PlayPage : ContentPage
         InitTreeFromFile();
         InitializeComponent();
 		BindingContext = vm;
+ 
 	}
-	private async void AnimatedText(Label text)
+
+    private void Ending()
+    {
+        return;
+    }
+
+    int index = 0;
+    int status = 0;
+    private async void AnimatedText(Label text) //status: 0 - text, 1-question
 	{
-		string downloadText = "Я тот самый человек, который лицезрел мирозданиe во время величия хаоса на Земле";
-		if (lever)
+        Node node = TreeStory.FindNode(storyIndex);
+        string downloadText;
+        if (node.text.Count == 0)
+        {
+            status = 1;
+        }
+        if (status == 0)
+        {
+            downloadText = node.text[index];
+            ChoiceLeft.IsVisible = false;
+            ChoiceLeft.IsEnabled = false;
+            ChoiceRight.IsVisible = false;
+            ChoiceRight.IsEnabled = false;
+        }
+        else
+        {
+            downloadText = node.question;
+            ChoiceLeft.IsVisible = true;
+            ChoiceLeft.IsEnabled = true;
+            ChoiceRight.IsVisible = true;
+            ChoiceRight.IsEnabled = true;
+            ChoiceLeft.Text = node.text_1;
+            ChoiceRight.Text = node.text_2;
+        }
+
+        if (lever)
 		{
 			text.Text = string.Empty;
             foreach (char c in downloadText)
@@ -167,7 +210,27 @@ public partial class PlayPage : ContentPage
                 text.Text += c;
                 await Task.Delay(10);
             }
-            lever = true;
+            if (status == 0)
+            {
+                if (node.text.IndexOf(downloadText) + 1 == node.text.Count)
+                {
+                    index = 0;
+                    status = 1;
+                }
+                else
+                    index++;
+                lever = true;
+            }
+            else
+            {
+                status = 0;
+                storyIndex++;
+                if (TreeStory.FindNode(storyIndex) == null)
+                {
+                    Ending();
+                    storyIndex--;
+                }
+            }
         }
     }
 	private void OnImageTapped(object sender, EventArgs e)
@@ -178,5 +241,28 @@ public partial class PlayPage : ContentPage
 			AnimatedText(text);
 		}
 	}
-    
+
+    private void leftChoiceClicked(object sender, EventArgs e)
+    {
+        lever = true;
+        storyIndex = 1;
+        string mainDir = FileSystem.Current.AppDataDirectory;
+        if (!File.Exists($"{mainDir}/save.txt"))
+            File.Create($"{mainDir}/save.txt").Close();
+        WriteTextToFile(storyIndex.ToString(), "save.txt");
+        var text = (Label)MainText;
+        AnimatedText(text);
+    }
+
+    private void rightChoiceClicked(object sender, EventArgs e)
+    {
+        storyIndex = -1;
+        lever = true;
+        string mainDir = FileSystem.Current.AppDataDirectory;
+        if (!File.Exists($"{mainDir}/save.txt"))
+            File.Create($"{mainDir}/save.txt").Close();
+        WriteTextToFile(storyIndex.ToString(), "save.txt");
+        var text = (Label)MainText;
+        AnimatedText(text);
+    }
 }

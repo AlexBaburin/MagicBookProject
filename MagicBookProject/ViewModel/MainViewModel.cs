@@ -25,8 +25,8 @@ public partial class MainViewModel : ObservableObject
         using StreamReader reader = new StreamReader(InputStream);
         string? line = await reader.ReadLineAsync();
         if (line == "")
-            line = "100";
-        string line2 = line;
+            line = "0";
+        string? line2 = line;
         return line2;
     }
     public async void WriteTextToFile(string text, string targetFileName)
@@ -58,6 +58,14 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     async Task TapPlay()
     {
+        string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "save.txt");
+        if (!File.Exists(targetFile))
+        {
+            File.Create(targetFile);
+            WriteTextToFile("0", "save.txt");
+        }
+        string line = await ReadTextFile("/save.txt");
+        PlayPage.storyIndex = Convert.ToInt32(line);
         await Shell.Current.GoToAsync(nameof(PlayPage));
         Vibration.Vibrate(100);
     }
