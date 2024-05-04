@@ -5,7 +5,7 @@
              Title="Настройки"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:SettingsViewModel">
-    <Grid RowDefinitions="250, auto, auto, auto, 250, auto" Padding="30" 
+    <Grid RowDefinitions="0, auto, auto, auto, auto, 400, auto" Padding="30" 
           ColumnDefinitions="*, *, *"
           RowSpacing="10">
         <Label
@@ -14,8 +14,19 @@
             FontAttributes="Bold"
             VerticalOptions="Center"
             HorizontalOptions="Center"
-            Grid.Row="2"
+            Grid.Row="1"
             />
+        <Label
+            Grid.ColumnSpan="3"
+            Text="Скорость текста:"
+            FontAttributes="Bold"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Grid.Row="3"
+            />
+        <RadioButton x:Name="radiobutton1" Grid.Column="0" Grid.Row="4" Content="Быстрая" IsChecked="False" CheckedChanged="SpeedText"/>
+        <RadioButton x:Name="radiobutton2" Grid.Column="1" Grid.Row="4" Content="Обычная" IsChecked="true" CheckedChanged="SpeedText"/>
+        <RadioButton x:Name="radiobutton3" Grid.Column="2" Grid.Row="4" Content="Медленная" IsChecked="False" CheckedChanged="SpeedText"/>
         <Slider
             Grid.ColumnSpan="3"
             x:Name="Volume"
@@ -24,10 +35,10 @@
             Value="50"
             ValueChanged="Slider_ValueChanged"
             MaximumWidthRequest="300"
-            Grid.Row="3"
+            Grid.Row="2"
             />
         <Button Text="Назад" Grid.ColumnSpan="3"
-            FontAttributes="Bold" Grid.Row="5">
+            FontAttributes="Bold" Grid.Row="6">
             <Button.GestureRecognizers>
                 <TapGestureRecognizer
                 Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SettingsViewModel}}, Path=GoBackCommand} "/>

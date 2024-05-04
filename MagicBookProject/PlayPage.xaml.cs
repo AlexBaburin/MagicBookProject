@@ -6,6 +6,7 @@ namespace MagicBookProject;
 
 public partial class PlayPage : ContentPage
 {
+
     public class Node
     {
         public int index;
@@ -157,6 +158,8 @@ public partial class PlayPage : ContentPage
             Text.Clear();
         }
     }
+    /////////////////////////////////////
+    public static double SpeedText = 0.5;
     public PlayPage(PlayViewModel vm)
 	{
         
@@ -208,7 +211,7 @@ public partial class PlayPage : ContentPage
                 if (lever)
                     lever = false;
                 text.Text += c;
-                await Task.Delay(10);
+                await Task.Delay((int)(100 * SpeedText));
             }
             if (status == 0)
             {

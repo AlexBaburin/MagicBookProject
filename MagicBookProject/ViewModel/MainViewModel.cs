@@ -9,6 +9,7 @@ namespace MagicBookProject.ViewModel;
 public partial class MainViewModel : ObservableObject
 {
     public static double value;
+    public static string str_speed;
 
     [RelayCommand]
     async Task TapInfo()
@@ -25,8 +26,10 @@ public partial class MainViewModel : ObservableObject
         using StreamReader reader = new StreamReader(InputStream);
         string? line = await reader.ReadLineAsync();
         if (line == "")
-            line = "0";
-        string? line2 = line;
+            line = "100";
+        if (line == "Быстраяая")
+            line = "Быстрая";
+        string line2 = line;
         return line2;
     }
     public async void WriteTextToFile(string text, string targetFileName)
@@ -52,6 +55,16 @@ public partial class MainViewModel : ObservableObject
         }
         string line = await ReadTextFile("/settings.txt");
         value = Convert.ToDouble(line);
+
+        targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "speed.txt");
+        //File.Delete(targetFile);
+        if (!File.Exists(targetFile))
+        {
+            File.Create(targetFile);
+            WriteTextToFile("Обычная", "speed.txt");
+        }
+        line = await ReadTextFile("/speed.txt");
+        str_speed = line;
         await Shell.Current.GoToAsync(nameof(SettingsPage));
         Vibration.Vibrate(100);
     }
