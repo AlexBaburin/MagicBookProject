@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Android.Health.Connect.DataTypes.Units;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MagicBookProject.ViewModel;
-
 public partial class SettingsViewModel : ObservableObject
 {
+
     [RelayCommand]
     async Task GoBack()
     {

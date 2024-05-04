@@ -5,17 +5,13 @@
              Title="Настройки"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:SettingsViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Основные настройки игры:"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"/>
+    <Grid RowDefinitions="auto, auto, 535, auto" Padding="30">
         <Label
             Text="Громкость:"
+            FontAttributes="Bold"
             VerticalOptions="Center"
             HorizontalOptions="Center"
-            Padding="30"
+            Grid.Row="0"
             />
         <Slider
             x:Name="Volume"
@@ -24,6 +20,14 @@
             Value="50"
             ValueChanged="Slider_ValueChanged"
             MaximumWidthRequest="300"
+            Grid.Row="1"
             />
-    </VerticalStackLayout>
+        <Button Text="Назад"
+            FontAttributes="Bold" Grid.Row="3">
+            <Button.GestureRecognizers>
+                <TapGestureRecognizer
+                Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SettingsViewModel}}, Path=GoBackCommand} "/>
+            </Button.GestureRecognizers>
+        </Button>
+    </Grid>
 </ContentPage>

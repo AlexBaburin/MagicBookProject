@@ -5,7 +5,7 @@
              Title="Об Авторах"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:InfoViewModel">
-    <Grid RowDefinitions="200, auto, auto, auto, auto, auto, 100, auto"
+    <Grid RowDefinitions="200, auto, auto, auto, auto, auto, 50, auto"
       Padding="10"
       RowSpacing="30">
         
@@ -50,10 +50,10 @@
 
         <Button Text="Назад"
         FontAttributes="Bold" Grid.Row="7">
-                <Button.GestureRecognizers>
-                    <TapGestureRecognizer
-        Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:InfoViewModel}}, Path=GoBackCommand} "/>
-                </Button.GestureRecognizers>
-            </Button>
-        </Grid>
+            <Button.GestureRecognizers>
+                <TapGestureRecognizer
+                Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:InfoViewModel}}, Path=GoBackCommand} "/>
+            </Button.GestureRecognizers>
+        </Button>
+    </Grid>
 </ContentPage>
