@@ -23,7 +23,7 @@ public partial class MainViewModel : ObservableObject
         string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, targetFileName);
         using FileStream InputStream = System.IO.File.OpenRead(targetFile);
         using StreamReader reader = new StreamReader(InputStream);
-        string? line = await reader.ReadToEndAsync();
+        string? line = await reader.ReadLineAsync();
         if (line == "")
             line = "100";
         string line2 = line;

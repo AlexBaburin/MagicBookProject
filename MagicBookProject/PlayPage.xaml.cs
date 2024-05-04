@@ -165,7 +165,7 @@ public partial class PlayPage : ContentPage
                 if (lever)
                     lever = false;
                 text.Text += c;
-                await Task.Delay(100);
+                await Task.Delay(10);
             }
             lever = true;
         }

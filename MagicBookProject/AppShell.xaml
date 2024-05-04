@@ -8,7 +8,6 @@
     Title="MagicBookProject">
 
     <ShellContent
-        Title="Меню"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
