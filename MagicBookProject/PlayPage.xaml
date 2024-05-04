@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MagicBookProject.PlayPage"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
+             Title="Magic Book"
              x:DataType="viewmodel:PlayViewModel">
     <Grid >
-        <Grid VerticalOptions="Center">
-            <Image Source="bgl.png" ScaleY="1" ScaleX="1"/>
+        <Grid>
+            <Image Source="bgl.png" ScaleY="1" ScaleX="1" Aspect="AspectFill" VerticalOptions="Start"/>
         </Grid>
         <Grid VerticalOptions="Center">
             <Image Source="anime_girl.png" Scale="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="0, 0, 0, 0"/>
@@ -18,6 +19,9 @@
                 </Image.GestureRecognizers>
             </Image>
             <Label x:Name="MainText" FontSize="18" Text="My text" Padding="5,5,5,5" Margin="10,40,0,0" VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="Red" />
+        </Grid>
+        <Grid ColumnDefinitions="65, 100, *" RowDefinitions="470, auto, *">
+            <Label HorizontalTextAlignment="Center" Text="Демидов" Grid.Row="1" Grid.Column="1" TextColor="Red" FontSize="18"/>
         </Grid>
     </Grid>
 </ContentPage>
