@@ -48,7 +48,7 @@
             FontAttributes="Bold"
             HorizontalTextAlignment="Center"/>
 
-        <Button Text="Назад"
+        <Button Text="Назад" Style="{StaticResource BackButtonStyle}"
         FontAttributes="Bold" Grid.Row="7">
             <Button.GestureRecognizers>
                 <TapGestureRecognizer
