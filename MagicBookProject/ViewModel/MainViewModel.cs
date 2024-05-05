@@ -26,7 +26,7 @@ public partial class MainViewModel : ObservableObject
         using StreamReader reader = new StreamReader(InputStream);
         string? line = await reader.ReadLineAsync();
         if (line == "")
-            line = "100";
+            line = "0";
         if (line == "Быстраяая")
             line = "Быстрая";
         string line2 = line;
@@ -50,7 +50,7 @@ public partial class MainViewModel : ObservableObject
         string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "settings.txt");
         if (!File.Exists(targetFile))
         {
-            File.Create(targetFile);
+            File.Create(targetFile).Close();
             WriteTextToFile("50", "settings.txt");
         }
         string line = await ReadTextFile("/settings.txt");
@@ -60,7 +60,7 @@ public partial class MainViewModel : ObservableObject
         //File.Delete(targetFile);
         if (!File.Exists(targetFile))
         {
-            File.Create(targetFile);
+            File.Create(targetFile).Close();
             WriteTextToFile("Обычная", "speed.txt");
         }
         line = await ReadTextFile("/speed.txt");
@@ -74,7 +74,7 @@ public partial class MainViewModel : ObservableObject
         string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "save.txt");
         if (!File.Exists(targetFile))
         {
-            File.Create(targetFile);
+            File.Create(targetFile).Close();
             WriteTextToFile("0", "save.txt");
         }
         string line = await ReadTextFile("/save.txt");

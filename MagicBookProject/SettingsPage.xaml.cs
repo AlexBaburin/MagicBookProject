@@ -1,6 +1,5 @@
 using MagicBookProject.ViewModel;
 using Plugin.Maui.Audio;
-using static Java.Util.Jar.Attributes;
 namespace MagicBookProject;
 
 public partial class SettingsPage : ContentPage

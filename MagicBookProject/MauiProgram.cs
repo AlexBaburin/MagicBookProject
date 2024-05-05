@@ -16,6 +16,15 @@ namespace MagicBookProject
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            string targetFileSave = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "save.txt");
+            if (!File.Exists(targetFileSave))
+                File.Create(targetFileSave).Close();
+            string targetFileSettings = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "settings.txt");
+            if (!File.Exists(targetFileSettings))
+                File.Create(targetFileSettings).Close();
+            string targetFileSpeed = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "speed.txt");
+            if (!File.Exists(targetFileSpeed))
+                File.Create(targetFileSpeed).Close();
             builder.Services.AddSingleton(AudioManager.Current);
             builder.Services.AddTransient<MainPage>();
 #if DEBUG

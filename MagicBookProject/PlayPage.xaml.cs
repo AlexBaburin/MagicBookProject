@@ -176,13 +176,15 @@ public partial class PlayPage : ContentPage
 
     int index = 0;
     int status = 0;
+    bool leverlever = false;
     private async void AnimatedText(Label text) //status: 0 - text, 1-question
 	{
         Node node = TreeStory.FindNode(storyIndex);
         string downloadText;
-        if (node.text.Count == 0)
+        if (node.text.Count == 0 && status == 0)
         {
             status = 1;
+            leverlever = true;
         }
         if (status == 0)
         {
@@ -201,6 +203,11 @@ public partial class PlayPage : ContentPage
             ChoiceRight.IsEnabled = true;
             ChoiceLeft.Text = node.text_1;
             ChoiceRight.Text = node.text_2;
+            if (leverlever)
+            {
+                lever = true;
+                leverlever = false;
+            }
         }
 
         if (lever)
@@ -219,6 +226,7 @@ public partial class PlayPage : ContentPage
                 {
                     index = 0;
                     status = 1;
+                    leverlever = true;
                 }
                 else
                     index++;
@@ -247,8 +255,9 @@ public partial class PlayPage : ContentPage
 
     private void leftChoiceClicked(object sender, EventArgs e)
     {
-        lever = true;
-        storyIndex = 1;
+        Node node = TreeStory.FindNode(storyIndex).left;
+        if (node != null)
+            storyIndex = node.index;
         string mainDir = FileSystem.Current.AppDataDirectory;
         if (!File.Exists($"{mainDir}/save.txt"))
             File.Create($"{mainDir}/save.txt").Close();
@@ -259,8 +268,9 @@ public partial class PlayPage : ContentPage
 
     private void rightChoiceClicked(object sender, EventArgs e)
     {
-        storyIndex = -1;
-        lever = true;
+        Node node = TreeStory.FindNode(storyIndex).right;
+        if (node != null)
+            storyIndex = node.index;
         string mainDir = FileSystem.Current.AppDataDirectory;
         if (!File.Exists($"{mainDir}/save.txt"))
             File.Create($"{mainDir}/save.txt").Close();
