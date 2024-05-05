@@ -13,11 +13,12 @@ public partial class PlayPage : ContentPage
         public List<string> text;
         public int background;
         public string question;
+        public int character;
         public string text_1, text_2;
         public Node left;
         public Node right;
 
-        public Node(int i, string q, List<string> t, string t1, string t2, int b)
+        public Node(int i, string q, List<string> t, int c, string t1, string t2, int b)
         {
             index = i;
             question = q;
@@ -26,6 +27,7 @@ public partial class PlayPage : ContentPage
             {
                 text.Add(s);
             }
+            character = c;
             background = b;
             text_1 = t1;
             text_2 = t2;
@@ -47,26 +49,26 @@ public partial class PlayPage : ContentPage
             root = null;
         }
 
-        public void AddNode(int index, string question, List<string> text, string text_1, string text_2, int background)
+        public void AddNode(int index, string question, List<string> text, int character, string text_1, string text_2, int background)
         {
-            root = AddRec(root, index, question, text, text_1, text_2, background);
+            root = AddRec(root, index, question, text, character, text_1, text_2, background);
         }
 
-        private Node AddRec(Node root, int index, string question, List<string> text, string text_1, string text_2, int background)
+        private Node AddRec(Node root, int index, string question, List<string> text, int character, string text_1, string text_2, int background)
         {
             if (root == null)
             {
-                root = new Node(index, question, text, text_1, text_2, background);
+                root = new Node(index, question, text, character, text_1, text_2, background);
                 return root;
             }
 
             if (index < root.index)
             {
-                root.left = AddRec(root.left, index, question, text, text_1, text_2, background);
+                root.left = AddRec(root.left, index, question, text, character, text_1, text_2, background);
             }
             else if (index > root.index)
             {
-                root.right = AddRec(root.right, index, question, text, text_1, text_2, background);
+                root.right = AddRec(root.right, index, question, text, character, text_1, text_2, background);
             }
 
             return root;
@@ -136,13 +138,14 @@ public partial class PlayPage : ContentPage
 
         List<string> Text= new List<string> { };
         string Text_1 = "", Text_2 = "", Question="";
-        int Index = 0, Background = 0;
+        int Index = 0, Background = 0, Character = 0;
 
         for (int i=0; i<DataFromFile.Length; i+=3)
         {
             int.TryParse(DataFromFile[i], out Index);
-            int.TryParse(DataFromFile[i+1], out Background);
-            i += 2;
+            int.TryParse(DataFromFile[i + 1], out Background);
+            int.TryParse(DataFromFile[i + 2], out Character);
+            i += 3;
             while (DataFromFile[i] != "==\r")
             {
                 Text.Add(DataFromFile[i]);
@@ -154,7 +157,7 @@ public partial class PlayPage : ContentPage
             string[] Elections = DataFromFile[i+1].Split('/');
             Text_1 = Elections[0];
             Text_2 = Elections[1];
-            TreeStory.AddNode(Index, Question, Text, Text_1, Text_2, Background);
+            TreeStory.AddNode(Index, Question, Text, Character, Text_1, Text_2, Background);
             Text.Clear();
         }
     }
