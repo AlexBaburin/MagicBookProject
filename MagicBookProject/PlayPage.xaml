@@ -21,9 +21,6 @@
             <Label x:Name="MainText" FontSize="18" Text="Итак" Padding="5,5,5,5" Margin="10,40,0,0" 
                    VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="Red" />
         </Grid>
-        <Grid ColumnDefinitions="*, 100, *" RowDefinitions="*, *, *, 200"> 
-            <Label HorizontalTextAlignment="Center" Text="Демидов" Grid.Row="1" Grid.Column="1" TextColor="Red" FontSize="18"/>
-        </Grid>
         <Grid ColumnDefinitions="20, 150, *, 150, *"
             RowDefinitions="*, auto, 40">
             <Button BackgroundColor="Beige" Grid.Row="1" Grid.Column="1" x:Name="ChoiceLeft" Clicked="leftChoiceClicked"

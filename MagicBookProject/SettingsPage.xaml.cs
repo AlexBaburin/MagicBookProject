@@ -74,5 +74,9 @@ public partial class SettingsPage : ContentPage
             File.Create($"{mainDir}/speed.txt").Close();
         WriteTextToFile((string)radioButton.Content, "speed.txt");
     }
-  
+
+    private void resetButtonClicked(object sender, EventArgs e)
+    {
+        WriteTextToFile("0", "save.txt");
+    }
 }

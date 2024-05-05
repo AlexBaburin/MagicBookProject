@@ -180,6 +180,8 @@ public partial class PlayPage : ContentPage
     int index = 0;
     int status = 0;
     bool leverlever = false;
+    bool buttonFlag = true;
+    int counter = 0;
     private async void AnimatedText(Label text) //status: 0 - text, 1-question
 	{
         Node node = TreeStory.FindNode(storyIndex);
@@ -187,15 +189,17 @@ public partial class PlayPage : ContentPage
         if (node.text.Count == 0 && status == 0)
         {
             status = 1;
-            leverlever = true;
         }
         if (status == 0)
         {
+            if (counter == 0)
+                leverlever = true;
             downloadText = node.text[index];
             ChoiceLeft.IsVisible = false;
             ChoiceLeft.IsEnabled = false;
             ChoiceRight.IsVisible = false;
             ChoiceRight.IsEnabled = false;
+            counter++;
         }
         else
         {
@@ -206,20 +210,23 @@ public partial class PlayPage : ContentPage
             ChoiceRight.IsEnabled = true;
             ChoiceLeft.Text = node.text_1;
             ChoiceRight.Text = node.text_2;
-            if (leverlever)
-            {
-                lever = true;
-                leverlever = false;
-            }
+        }
+        if (leverlever)
+        {
+            lever = true;
+            leverlever = false;
         }
 
         if (lever)
 		{
+            buttonFlag = false;
 			text.Text = string.Empty;
             foreach (char c in downloadText)
             {
                 if (lever)
+                {
                     lever = false;
+                }
                 text.Text += c;
                 await Task.Delay((int)(100 * SpeedText));
             }
@@ -228,6 +235,7 @@ public partial class PlayPage : ContentPage
                 if (node.text.IndexOf(downloadText) + 1 == node.text.Count)
                 {
                     index = 0;
+                    counter = 0;
                     status = 1;
                     leverlever = true;
                 }
@@ -238,13 +246,13 @@ public partial class PlayPage : ContentPage
             else
             {
                 status = 0;
-                storyIndex++;
                 if (TreeStory.FindNode(storyIndex) == null)
                 {
                     Ending();
-                    storyIndex--;
                 }
             }
+
+            buttonFlag = true;
         }
     }
 	private void OnImageTapped(object sender, EventArgs e)
@@ -258,6 +266,9 @@ public partial class PlayPage : ContentPage
 
     private void leftChoiceClicked(object sender, EventArgs e)
     {
+        if (!buttonFlag)
+            return;
+        leverlever = true;
         Node node = TreeStory.FindNode(storyIndex).left;
         if (node != null)
             storyIndex = node.index;
@@ -271,6 +282,9 @@ public partial class PlayPage : ContentPage
 
     private void rightChoiceClicked(object sender, EventArgs e)
     {
+        if (!buttonFlag)
+            return;
+        leverlever = true;
         Node node = TreeStory.FindNode(storyIndex).right;
         if (node != null)
             storyIndex = node.index;

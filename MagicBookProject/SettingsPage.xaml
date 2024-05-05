@@ -5,7 +5,7 @@
              Title="Настройки"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:SettingsViewModel">
-    <Grid RowDefinitions="0, auto, auto, auto, auto, 400, auto" Padding="30" 
+    <Grid RowDefinitions="0, auto, auto, auto, auto, auto, auto, 350, auto" Padding="30" 
           ColumnDefinitions="*, *, *"
           RowSpacing="10">
         <Label
@@ -37,8 +37,18 @@
             MaximumWidthRequest="300"
             Grid.Row="2"
             />
+        <Label
+            Grid.ColumnSpan="3"
+            Text="Сбросить прогресс сюжета:"
+            FontAttributes="Bold"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Grid.Row="5"
+        />
+        <Button Text="Сбросить" Grid.ColumnSpan="3"
+        FontAttributes="Bold" Grid.Row="6" Clicked="resetButtonClicked"/>
         <Button Text="Назад" Grid.ColumnSpan="3"
-            FontAttributes="Bold" Grid.Row="6">
+            FontAttributes="Bold" Grid.Row="8">
             <Button.GestureRecognizers>
                 <TapGestureRecognizer
                 Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SettingsViewModel}}, Path=GoBackCommand} "/>
