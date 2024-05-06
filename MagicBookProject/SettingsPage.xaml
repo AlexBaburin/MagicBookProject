@@ -6,7 +6,7 @@
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:SettingsViewModel">
     <Grid>
-        <Image Source="settings.png" />
+        <Image Source="settings.png" Aspect="AspectFill"/>
         <Grid RowDefinitions="130, auto, auto, auto, auto, auto, auto, 350, auto" Padding="30" 
           ColumnDefinitions="*, *, *"
           RowSpacing="10">

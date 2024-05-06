@@ -6,7 +6,7 @@
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:InfoViewModel">
     <Grid>
-        <Image Source="authors.png" />
+        <Image Source="authors.png" Aspect="AspectFill"/>
         <Grid RowDefinitions="0, auto, auto, auto, auto, auto, 50, auto">
 
             <Button Text="Над игрой работали:" Grid.ColumnSpan="5" Grid.Row="1" IsEnabled="False"
