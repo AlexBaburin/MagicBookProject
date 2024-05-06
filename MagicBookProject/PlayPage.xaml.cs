@@ -172,11 +172,27 @@ public partial class PlayPage : ContentPage
         characterNames.Add("");
         characterNames.Add("test");
         characterNames.Add("test");
+        BackgroundImage.IsVisible = true;
+        PanelImage.IsVisible = true;
     }
 
     private void Ending()
     {
-        return;
+        BackgroundImage.Source = "end.png";
+        CharacterImage.IsVisible = false;
+        PanelImage.IsVisible = false;
+        PanelImage.IsEnabled = false;
+        NameImage.IsVisible = false;
+        MainText.IsVisible = false;
+        NameText.IsVisible = false;
+
+        ChoiceRight.IsVisible = false;
+        ChoiceLeft.IsVisible = false;
+        ChoiceRight.IsEnabled = false;
+        ChoiceLeft.IsEnabled = false;
+        index = 0;
+        storyIndex = 0;
+        WriteTextToFile(storyIndex.ToString(), "save.txt");
     }
 
     int index = 0;
@@ -212,6 +228,12 @@ public partial class PlayPage : ContentPage
         if (node.character != 0)
         {
             CharacterImage.Source = $"character_{node.character.ToString()}";
+        }
+
+        if (node.text_1 == "Далее" && (node.text_2 == "Далее\r" || node.text_2 == "Далее") && status > 0)
+        {
+            Ending();
+            return;
         }
         if (prevCharacter != node.character)
         {
@@ -257,12 +279,22 @@ public partial class PlayPage : ContentPage
         else
         {
             downloadText = node.question;
-            ChoiceLeft.IsVisible = true;
-            ChoiceLeft.IsEnabled = true;
-            ChoiceRight.IsVisible = true;
-            ChoiceRight.IsEnabled = true;
-            ChoiceLeft.Text = node.text_1;
-            ChoiceRight.Text = node.text_2;
+            if (storyIndex == 7 || storyIndex == 10)
+            {
+                ChoiceLeft.IsVisible = true;
+                ChoiceLeft.IsEnabled = true;
+
+                ChoiceLeft.Text = node.text_1;
+            }
+            else
+            {
+                ChoiceLeft.IsVisible = true;
+                ChoiceLeft.IsEnabled = true;
+                ChoiceRight.IsVisible = true;
+                ChoiceRight.IsEnabled = true;
+                ChoiceLeft.Text = node.text_1;
+                ChoiceRight.Text = node.text_2;
+            }
         }
         if (leverlever)
         {
@@ -298,12 +330,6 @@ public partial class PlayPage : ContentPage
             }
             else
             {
-               
-                if (TreeStory.FindNode(storyIndex) == null)
-                {
-                    Ending();
-                }
-
                 status++;
             }
 
