@@ -17,6 +17,11 @@ public partial class SettingsPage : ContentPage
     {
         // Write the file content to the app data directory  
         string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, targetFileName);
+        FileStream fileStream = File.Open(targetFile, FileMode.Open);
+        // Write the file content to the app data directory 
+        fileStream.SetLength(0);
+        fileStream.Close();
+
         using FileStream outputStream = System.IO.File.OpenWrite(targetFile);
         using StreamWriter streamWriter = new StreamWriter(outputStream);
         await streamWriter.WriteAsync(text);

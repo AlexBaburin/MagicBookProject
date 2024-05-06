@@ -15,8 +15,8 @@ public partial class PlayPage : ContentPage
         public string question;
         public int character;
         public string text_1, text_2;
-        public Node left;
-        public Node right;
+        public Node? left;
+        public Node? right;
 
         public Node(int i, string q, List<string> t, int c, string t1, string t2, int b)
         {
@@ -42,7 +42,7 @@ public partial class PlayPage : ContentPage
 
     public class BinaryTree
     {
-        private Node root;
+        private Node? root;
 
         public BinaryTree()
         {
@@ -54,7 +54,7 @@ public partial class PlayPage : ContentPage
             root = AddRec(root, index, question, text, character, text_1, text_2, background);
         }
 
-        private Node AddRec(Node root, int index, string question, List<string> text, int character, string text_1, string text_2, int background)
+        private Node AddRec(Node? root, int index, string question, List<string> text, int character, string text_1, string text_2, int background)
         {
             if (root == null)
             {
@@ -74,12 +74,12 @@ public partial class PlayPage : ContentPage
             return root;
         }
 
-        public Node FindNode(int index)
+        public Node? FindNode(int index)
         {
             return FindNodeRec(root, index);
         }
 
-        private Node FindNodeRec(Node root, int index)
+        private Node? FindNodeRec(Node? root, int index)
         {
             if (root == null || root.index == index)
             {
@@ -94,7 +94,7 @@ public partial class PlayPage : ContentPage
             return FindNodeRec(root.right, index);
         }
 
-        private void ClearTree(Node node)
+        private void ClearTree(Node? node)
         {
             if (node == null)
                 return;
@@ -184,7 +184,7 @@ public partial class PlayPage : ContentPage
     int counter = 0;
     private async void AnimatedText(Label text) //status: 0 - text, 1-question
 	{
-        Node node = TreeStory.FindNode(storyIndex);
+        Node? node = TreeStory.FindNode(storyIndex);
         string downloadText;
         if (node.text.Count == 0 && status == 0)
         {
@@ -269,7 +269,7 @@ public partial class PlayPage : ContentPage
         if (!buttonFlag)
             return;
         leverlever = true;
-        Node node = TreeStory.FindNode(storyIndex).left;
+        Node? node = TreeStory.FindNode(storyIndex).left;
         if (node != null)
             storyIndex = node.index;
         string mainDir = FileSystem.Current.AppDataDirectory;
@@ -285,7 +285,7 @@ public partial class PlayPage : ContentPage
         if (!buttonFlag)
             return;
         leverlever = true;
-        Node node = TreeStory.FindNode(storyIndex).right;
+        Node? node = TreeStory.FindNode(storyIndex).right;
         if (node != null)
             storyIndex = node.index;
         string mainDir = FileSystem.Current.AppDataDirectory;
