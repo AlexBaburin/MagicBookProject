@@ -79,7 +79,9 @@
 	  <None Remove="Resources\Images\Icon.png" />
 	  <None Remove="Resources\Images\Image1.png" />
 	  <None Remove="Resources\Images\new_panel.png" />
+	  <None Remove="Resources\Images\settings.png" />
 	  <None Remove="Resources\Raw\background.wav" />
+	  <None Remove="Resources\Raw\evening.txt" />
 	  <None Remove="Resources\Raw\settings.txt" />
 	  <None Remove="Resources\Raw\test.mp3" />
 	</ItemGroup>

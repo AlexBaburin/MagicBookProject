@@ -5,55 +5,19 @@
              Title="Об Авторах"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:InfoViewModel">
-    <Grid RowDefinitions="200, auto, auto, auto, auto, auto, 50, auto"
-      Padding="10"
-      RowSpacing="30">
-        
-        <Label Grid.Row="0" 
-            Text="Авторы"
-            FontSize="40"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            TextColor="White"
-            BackgroundColor="Navy"/>
+    <Grid>
+        <Image Source="authors.png" />
+        <Grid RowDefinitions="0, auto, auto, auto, auto, auto, 50, auto">
 
-        <Label Grid.Row="1" 
-            Text="Абрамов Данила"
-            FontSize="20"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"/>
-
-        <Label Grid.Row="2" 
-            Text="Лагутин Денис"
-            FontSize="20"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"/>
-
-        <Label Grid.Row="3" 
-            Text="Сафонов Роман"
-            FontSize="20"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"/> 
-
-        <Label Grid.Row="4" 
-            Text="Бабурин Александр"
-            FontSize="20"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"/>
-
-        <Label Grid.Row="5" 
-            Text="Кулиш Даниил"
-            FontSize="20"
-            FontAttributes="Bold"
-            HorizontalTextAlignment="Center"/>
-
-        <Button Text="Назад" Style="{StaticResource BackButtonStyle}"
-        FontAttributes="Bold" Grid.Row="7">
-            <Button.GestureRecognizers>
-                <TapGestureRecognizer
-                Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:InfoViewModel}}, Path=GoBackCommand} "/>
-            </Button.GestureRecognizers>
-        </Button>
+            <Button Text="Над игрой работали:" Grid.ColumnSpan="5" Grid.Row="1" IsEnabled="False"
+FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BackgroundColor="BurlyWood" BorderColor="Brown" BorderWidth="3" MaximumHeightRequest="50">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Offset="0" Color="Chocolate" />
+                        <GradientStop Offset="1" Color="Bisque" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
     </Grid>
 </ContentPage>

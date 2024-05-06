@@ -5,54 +5,72 @@
              Title="Настройки"
              xmlns:viewmodel="clr-namespace:MagicBookProject.ViewModel"
              x:DataType="viewmodel:SettingsViewModel">
-    <Grid RowDefinitions="0, auto, auto, auto, auto, auto, auto, 350, auto" Padding="30" 
+    <Grid>
+        <Image Source="settings.png" />
+        <Grid RowDefinitions="130, auto, auto, auto, auto, auto, auto, 350, auto" Padding="30" 
           ColumnDefinitions="*, *, *"
           RowSpacing="10">
-        <Label
-            Grid.ColumnSpan="3"
-            Text="Громкость:"
-            FontAttributes="Bold"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Grid.Row="1"
-            />
-        <Label
-            Grid.ColumnSpan="3"
-            Text="Скорость текста:"
-            FontAttributes="Bold"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Grid.Row="3"
-            />
-        <RadioButton x:Name="radiobutton1" Grid.Column="0" Grid.Row="4" Content="Быстрая" IsChecked="False" CheckedChanged="SpeedText"/>
-        <RadioButton x:Name="radiobutton2" Grid.Column="1" Grid.Row="4" Content="Обычная" IsChecked="true" CheckedChanged="SpeedText"/>
-        <RadioButton x:Name="radiobutton3" Grid.Column="2" Grid.Row="4" Content="Медленная" IsChecked="False" CheckedChanged="SpeedText"/>
-        <Slider
-            Grid.ColumnSpan="3"
-            x:Name="Volume"
-            Minimum="0"
-            Maximum="100"
-            Value="50"
-            ValueChanged="Slider_ValueChanged"
-            MaximumWidthRequest="300"
-            Grid.Row="2"
-            />
-        <Label
-            Grid.ColumnSpan="3"
-            Text="Сбросить прогресс сюжета:"
-            FontAttributes="Bold"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Grid.Row="5"
-        />
-        <Button Text="Сбросить" Grid.ColumnSpan="3"
-        FontAttributes="Bold" Grid.Row="6" Clicked="resetButtonClicked"/>
-        <Button Text="Назад" Grid.ColumnSpan="3"
-            FontAttributes="Bold" Grid.Row="8">
-            <Button.GestureRecognizers>
-                <TapGestureRecognizer
-                Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SettingsViewModel}}, Path=GoBackCommand} "/>
-            </Button.GestureRecognizers>
-        </Button>
+            <Button Text="Громкость:" Grid.ColumnSpan="3" Grid.Row="1" IsEnabled="False"
+    FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BackgroundColor="BurlyWood" BorderColor="BurlyWood" BorderWidth="3" WidthRequest="170" MaximumHeightRequest="50">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Offset="0" Color="Chocolate" />
+                        <GradientStop Offset="1" Color="Bisque" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Text="Скорость текста:" Grid.ColumnSpan="3" Grid.Row="3" IsEnabled="False"
+FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BackgroundColor="BurlyWood" BorderColor="BurlyWood" BorderWidth="3" WidthRequest="170" MaximumHeightRequest="50">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Offset="0" Color="Chocolate" />
+                        <GradientStop Offset="1" Color="Bisque" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Frame Grid.ColumnSpan="3" Grid.Row="4" CornerRadius="10" Padding="0" HasShadow="False" BackgroundColor="Transparent">
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Offset="0" Color="Chocolate" />
+                        <GradientStop Offset="1" Color="Bisque" />
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <StackLayout Orientation="Horizontal" Padding="20, 0, 0, 0">
+                    <RadioButton x:Name="radiobutton1" Grid.Column="0" Content="Быстрая" IsChecked="False" CheckedChanged="SpeedText" />
+                    <RadioButton x:Name="radiobutton2" Grid.Column="1" Content="Обычная" IsChecked="true" CheckedChanged="SpeedText"/>
+                    <RadioButton x:Name="radiobutton3" Grid.Column="2" Content="Медленная" IsChecked="False" CheckedChanged="SpeedText"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.ColumnSpan="3" Grid.Row="2" CornerRadius="10" Padding="0" HasShadow="False" BackgroundColor="Transparent">
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Offset="0" Color="Chocolate" />
+                        <GradientStop Offset="1" Color="Bisque" />
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <Slider
+        x:Name="Volume"
+        MaximumTrackColor="White"
+        MinimumTrackColor="DarkRed"
+        ThumbColor="Brown"
+        Minimum="0"
+        Maximum="100"
+        Value="50"
+        ValueChanged="Slider_ValueChanged"
+        MaximumWidthRequest="300">
+                </Slider>
+            </Frame>
+            <Button Text="Нажмите, чтобы сбросить прогресс" Grid.ColumnSpan="3"
+        FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BorderColor="Firebrick" BorderWidth="3" Grid.Row="6" Clicked="resetButtonClicked">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Offset="0" Color="Bisque" />
+                        <GradientStop Offset="1" Color="Brown" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
     </Grid>
 </ContentPage>
