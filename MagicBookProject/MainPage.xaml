@@ -15,7 +15,7 @@
             </Grid>
             <Label Text="MagicBook" Padding="100, 10, 0, 0" FontSize="18" TextColor="Wheat" FontAttributes="Bold" CharacterSpacing="10"/>
 
-            <Button Text="Играть"
+            <Button Text="Начать историю"
                 Grid.Row="1"
                 FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BackgroundColor="BurlyWood" BorderColor="BurlyWood" BorderWidth="3" WidthRequest="250">
                 <Button.Background>
