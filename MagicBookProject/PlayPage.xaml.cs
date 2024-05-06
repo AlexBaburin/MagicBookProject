@@ -119,6 +119,11 @@ public partial class PlayPage : ContentPage
     {
         // Write the file content to the app data directory  
         string targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, targetFileName);
+        FileStream fileStream = File.Open(targetFile, FileMode.Open);
+        // Write the file content to the app data directory 
+        fileStream.SetLength(0);
+        fileStream.Close();
+
         using FileStream outputStream = System.IO.File.OpenWrite(targetFile);
         using StreamWriter streamWriter = new StreamWriter(outputStream);
         await streamWriter.WriteAsync(text);
@@ -235,6 +240,13 @@ public partial class PlayPage : ContentPage
             Ending();
             return;
         }
+        if (node.text_1 == " " && status > 0)
+        {
+            storyIndex = node.left.index;
+            status = 0;
+            AnimatedText(text);
+            return;
+        }
         if (prevCharacter != node.character)
         {
             if (node.character == 0)
@@ -279,7 +291,7 @@ public partial class PlayPage : ContentPage
         else
         {
             downloadText = node.question;
-            if (storyIndex == 7 || storyIndex == 10)
+            if (storyIndex == 14 || storyIndex == 20)
             {
                 ChoiceLeft.IsVisible = true;
                 ChoiceLeft.IsEnabled = true;
