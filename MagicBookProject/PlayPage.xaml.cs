@@ -133,7 +133,7 @@ public partial class PlayPage : ContentPage
     }
     async void InitTreeFromFile()
     {
-        string Data = await ReadTextFile("Story.txt");
+        string Data = await ReadTextFile("evening.txt");
         string[] DataFromFile = Data.Split('\n');
 
         List<string> Text= new List<string> { };
@@ -164,13 +164,15 @@ public partial class PlayPage : ContentPage
     /////////////////////////////////////
     public static double SpeedText = 0.5;
     public PlayPage(PlayViewModel vm)
-	{
-        
+    {
+
         InitTreeFromFile();
         InitializeComponent();
-		BindingContext = vm;
- 
-	}
+        BindingContext = vm;
+        characterNames.Add("");
+        characterNames.Add("test");
+        characterNames.Add("test");
+    }
 
     private void Ending()
     {
@@ -182,10 +184,61 @@ public partial class PlayPage : ContentPage
     bool leverlever = false;
     bool buttonFlag = true;
     int counter = 0;
+    int prevCharacter = 0;
+    List<string> characterNames = new List<string>();
+    private async void AnimatedImage(bool direction) //false apper, true disappear
+    {
+        CharacterImage.Opacity = 0;
+        if (!direction)
+            for (int i = 0; i < 100; i++)
+            {
+                await Task.Delay(1);
+                CharacterImage.Opacity = i / 100.0;
+            }
+        else
+            for (int i = 100; i >= 0; i--)
+            {
+                await Task.Delay(1);
+                CharacterImage.Opacity = i / 100.0;
+            }
+    }
     private async void AnimatedText(Label text) //status: 0 - text, 1-question
 	{
         Node? node = TreeStory.FindNode(storyIndex);
         string downloadText;
+        string characterName = characterNames[node.character];
+        if (status >= 3)
+            status = 0;
+        if (node.character != 0)
+        {
+            CharacterImage.Source = $"character_{node.character.ToString()}";
+        }
+        if (prevCharacter != node.character)
+        {
+            if (node.character == 0)
+            {
+                prevCharacter = node.character;
+                AnimatedImage(true);
+            }
+            else
+            {
+                prevCharacter = node.character;
+                AnimatedImage(false);
+            }
+        }
+        if (node.background != 0)
+            BackgroundImage.Source = $"bg_{node.background.ToString()}";
+        if (characterName == "")
+        {
+            NameText.IsVisible = false;
+            NameImage.IsVisible = false;
+        }
+        else
+        {
+            NameText.IsVisible = true;
+            NameImage.IsVisible = true;
+            NameText.Text = characterName;
+        }
         if (node.text.Count == 0 && status == 0)
         {
             status = 1;
@@ -228,7 +281,7 @@ public partial class PlayPage : ContentPage
                     lever = false;
                 }
                 text.Text += c;
-                await Task.Delay((int)(100 * SpeedText));
+                await Task.Delay((int)(10 * SpeedText));
             }
             if (status == 0)
             {
@@ -245,11 +298,13 @@ public partial class PlayPage : ContentPage
             }
             else
             {
-                status = 0;
+               
                 if (TreeStory.FindNode(storyIndex) == null)
                 {
                     Ending();
                 }
+
+                status++;
             }
 
             buttonFlag = true;
@@ -266,6 +321,7 @@ public partial class PlayPage : ContentPage
 
     private void leftChoiceClicked(object sender, EventArgs e)
     {
+        status++;
         if (!buttonFlag)
             return;
         leverlever = true;
@@ -282,6 +338,8 @@ public partial class PlayPage : ContentPage
 
     private void rightChoiceClicked(object sender, EventArgs e)
     {
+
+        status++;
         if (!buttonFlag)
             return;
         leverlever = true;
