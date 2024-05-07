@@ -7,7 +7,7 @@
              x:DataType="viewmodel:PlayViewModel">
     <Grid >
         <Grid>
-            <Image x:Name="BackgroundImage" Source="bg_1.png" ScaleY="1" ScaleX="1" Aspect="AspectFill" VerticalOptions="Start"/>
+            <Image x:Name="BackgroundImage" Source="bg_1.png" ScaleY="1" ScaleX="1" Aspect="AspectFill" HorizontalOptions="Start"/>
         </Grid>
         <Grid VerticalOptions="Center">
             <Image x:Name="CharacterImage" HorizontalOptions="Center" VerticalOptions="Center" Margin="0, 0, 0, 0" Scale="1"/>

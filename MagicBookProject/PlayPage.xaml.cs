@@ -184,6 +184,7 @@ public partial class PlayPage : ContentPage
     private void Ending()
     {
         BackgroundImage.Aspect = Aspect.AspectFill;
+        BackgroundImage.HorizontalOptions = LayoutOptions.Start;
         if (storyIndex == 13)
             BackgroundImage.Source = "end_1.png";
         else if (storyIndex == 36)
