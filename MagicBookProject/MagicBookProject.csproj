@@ -76,6 +76,9 @@
 	  <None Remove="Resources\Images\background_main_menu.png" />
 	  <None Remove="Resources\Images\bg_1.png" />
 	  <None Remove="Resources\Images\character_1.png" />
+	  <None Remove="Resources\Images\end_1.png" />
+	  <None Remove="Resources\Images\end_2.png" />
+	  <None Remove="Resources\Images\end_3.png" />
 	  <None Remove="Resources\Images\Icon.png" />
 	  <None Remove="Resources\Images\Image1.png" />
 	  <None Remove="Resources\Images\new_panel.png" />

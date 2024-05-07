@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
+using System.Xml.Linq;
 
 namespace MagicBookProject.ViewModel;
 
@@ -57,7 +59,6 @@ public partial class MainViewModel : ObservableObject
         value = Convert.ToDouble(line);
 
         targetFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "speed.txt");
-        //File.Delete(targetFile);
         if (!File.Exists(targetFile))
         {
             File.Create(targetFile).Close();
@@ -65,6 +66,7 @@ public partial class MainViewModel : ObservableObject
         }
         line = await ReadTextFile("/speed.txt");
         str_speed = line;
+        
         await Shell.Current.GoToAsync(nameof(SettingsPage));
         Vibration.Vibrate(100);
     }

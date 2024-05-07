@@ -183,7 +183,13 @@ public partial class PlayPage : ContentPage
 
     private void Ending()
     {
-        BackgroundImage.Source = "end.png";
+        BackgroundImage.Aspect = Aspect.AspectFill;
+        if (storyIndex == 13)
+            BackgroundImage.Source = "end_1.png";
+        else if (storyIndex == 36)
+            BackgroundImage.Source = "end_2.png";
+        else if (storyIndex == -1)
+            BackgroundImage.Source = "end_3.png";
         CharacterImage.IsVisible = false;
         PanelImage.IsVisible = false;
         PanelImage.IsEnabled = false;

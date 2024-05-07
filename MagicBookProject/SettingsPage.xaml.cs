@@ -52,7 +52,7 @@ public partial class SettingsPage : ContentPage
                 radioButton.IsChecked = true;
                 break;
             case "Медленная":
-                PlayPage.SpeedText = 1;
+                PlayPage.SpeedText = 5;
                 radioButton = (RadioButton)FindByName("radiobutton3");
                 radioButton.IsChecked = true;
                 break;
@@ -71,7 +71,7 @@ public partial class SettingsPage : ContentPage
                     PlayPage.SpeedText = 0.25;
                     break;
                 case "Медленная":
-                    PlayPage.SpeedText = 1;
+                    PlayPage.SpeedText = 5;
                     break;
             }
         string mainDir = FileSystem.Current.AppDataDirectory;
