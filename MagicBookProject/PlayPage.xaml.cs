@@ -1,5 +1,6 @@
 using MagicBookProject.ViewModel;
 using Microsoft.Maui.Devices.Sensors;
+using Plugin.Maui.Audio;
 //using MetalPerformanceShaders;
 
 namespace MagicBookProject;
@@ -169,7 +170,7 @@ public partial class PlayPage : ContentPage
     }
     /////////////////////////////////////
     public static double SpeedText = 0.5;
-    public PlayPage(PlayViewModel vm)
+    public PlayPage(PlayViewModel vm, IAudioManager audioManager)
     {
 
         InitTreeFromFile();
@@ -180,6 +181,7 @@ public partial class PlayPage : ContentPage
         characterNames.Add("Друг");
         BackgroundImage.IsVisible = true;
         PanelImage.IsVisible = true;
+        this.audioManager = audioManager;
     }
 
     private void Ending()
@@ -443,17 +445,38 @@ public partial class PlayPage : ContentPage
             }
         }
     }
-
+    int teaCounter = 0;
+    private IAudioManager audioManager;
+    private IAudioPlayer player;
     private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
     {
         // Update UI Label with accelerometer state
         MainText.Text = $"{e.Reading}";
+        ChoiceLeft.IsVisible = false;
+        ChoiceRight.IsVisible = false;
+        MainText.Text = "Наклоните телефон, чтобы налить чай";
+        CharacterImage.IsVisible = true;
+        CharacterImage.Source = "kettle.png";
+
         var text = (Label)MainText;
-        if (e.Reading.Acceleration.X < -0.9 && e.Reading.Acceleration.Y < 0.2)
+        if (e.Reading.Acceleration.X > 0.9 && e.Reading.Acceleration.Y < 0.2)
+        {
+            teaCounter++;
+            Task.Delay(30);
+            PlaySound("bubble.wav");
+            
+        }
+        if (teaCounter == 50) 
         {
             ToggleAccelerometer();
             IsCoolFeatureComplete = 2;
             AnimatedText(text);
+            PlaySound("teacomplete.wav");
         }
+    }
+    private async void PlaySound(string text)
+    {
+        player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(text));
+        player.Play();
     }
 }
