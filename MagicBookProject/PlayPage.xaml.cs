@@ -280,6 +280,16 @@ public partial class PlayPage : ContentPage
             if (counter == 0)
                 leverlever = true;
             downloadText = node.text[index];
+            if(downloadText=="Я проснулся.\r" && storyIndex==0)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Flashlight.TurnOnAsync();
+                    await Task.Delay(10);
+                    Flashlight.TurnOffAsync();
+                }
+                Vibration.Vibrate(100);
+            }
             ChoiceLeft.IsVisible = false;
             ChoiceLeft.IsEnabled = false;
             ChoiceRight.IsVisible = false;
@@ -346,7 +356,7 @@ public partial class PlayPage : ContentPage
             buttonFlag = true;
         }
     }
-	private void OnImageTapped(object sender, EventArgs e)
+	private async void OnImageTapped(object sender, EventArgs e)
 	{
 		if (sender is Image image)
 		{
@@ -370,6 +380,7 @@ public partial class PlayPage : ContentPage
         WriteTextToFile(storyIndex.ToString(), "save.txt");
         var text = (Label)MainText;
         AnimatedText(text);
+        Vibration.Vibrate(100);
     }
 
     private void rightChoiceClicked(object sender, EventArgs e)
@@ -388,5 +399,6 @@ public partial class PlayPage : ContentPage
         WriteTextToFile(storyIndex.ToString(), "save.txt");
         var text = (Label)MainText;
         AnimatedText(text);
+        Vibration.Vibrate(100);
     }
 }

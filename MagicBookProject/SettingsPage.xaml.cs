@@ -80,8 +80,33 @@ public partial class SettingsPage : ContentPage
         WriteTextToFile((string)radioButton.Content, "speed.txt");
     }
 
-    private void resetButtonClicked(object sender, EventArgs e)
+    private async void resetButtonClicked(object sender, EventArgs e)
     {
+        button_reset.BorderColor = Colors.Orange;
+        button_reset.TextColor = Colors.Orange;
+        Vibration.Vibrate(50);
         WriteTextToFile("0", "save.txt");
+        await Task.Delay(100);
+        button_reset.BorderColor = Colors.Firebrick;
+        button_reset.TextColor=Colors.DarkRed;
+    }
+    int Denis_count = 1;
+    private async void DenisClicked(object sender, EventArgs e)
+    {
+        Vibration.Vibrate(50);
+        Denis_count++;
+        if (Denis_count % 2 == 0)
+        {
+
+            await Flashlight.TurnOnAsync();
+            Lagutin.BorderColor = Colors.Orange;
+            Lagutin.TextColor = Colors.Orange;
+        }
+        else
+        {
+            await Flashlight.TurnOffAsync();
+            Lagutin.BorderColor = Colors.Brown;
+            Lagutin.TextColor = Colors.DarkRed;
+        }
     }
 }

@@ -36,7 +36,7 @@ FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BackgroundCo
                         <GradientStop Offset="1" Color="Bisque" />
                     </LinearGradientBrush>
                 </Frame.Background>
-                <StackLayout Orientation="Horizontal" Padding="20, 0, 0, 0">
+                <StackLayout Orientation="Horizontal" Padding="5, 0, 0, 0">
                     <RadioButton x:Name="radiobutton1" Grid.Column="0" Content="Быстрая" IsChecked="False" CheckedChanged="SpeedText" />
                     <RadioButton x:Name="radiobutton2" Grid.Column="1" Content="Обычная" IsChecked="true" CheckedChanged="SpeedText"/>
                     <RadioButton x:Name="radiobutton3" Grid.Column="2" Content="Медленная" IsChecked="False" CheckedChanged="SpeedText"/>
@@ -62,12 +62,21 @@ FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BackgroundCo
         MaximumWidthRequest="300">
                 </Slider>
             </Frame>
-            <Button Text="Нажмите, чтобы сбросить прогресс" Grid.ColumnSpan="3"
+            <Button x:Name="button_reset" Text="Нажмите, чтобы сбросить прогресс" Grid.ColumnSpan="3"
         FontAttributes="Bold" TextTransform="Uppercase" TextColor="DarkRed" BorderColor="Firebrick" BorderWidth="3" Grid.Row="6" Clicked="resetButtonClicked">
                 <Button.Background>
                     <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
                         <GradientStop Offset="0" Color="Bisque" />
                         <GradientStop Offset="1" Color="Brown" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Lagutin"  Text="?" Grid.ColumnSpan="3" Grid.Row="7" IsEnabled="True"
+FontAttributes="Bold" TextColor="DarkRed" BackgroundColor="BurlyWood" BorderColor="Brown" BorderWidth="3" MaximumHeightRequest="50" MaximumWidthRequest="50" Clicked="DenisClicked">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                        <GradientStop Offset="0" Color="Chocolate" />
+                        <GradientStop Offset="1" Color="Bisque" />
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>

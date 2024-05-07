@@ -60,8 +60,9 @@
                 Command ="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapInfoCommand} "/>
                 </Button.GestureRecognizers>
             </Button>
-
+            
         </Grid>
+        
     </Grid>
 
 </ContentPage>
