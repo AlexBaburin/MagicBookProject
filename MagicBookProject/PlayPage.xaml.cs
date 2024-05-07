@@ -175,8 +175,8 @@ public partial class PlayPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
         characterNames.Add("");
-        characterNames.Add("test");
-        characterNames.Add("test");
+        characterNames.Add("Соседка");
+        characterNames.Add("Друг");
         BackgroundImage.IsVisible = true;
         PanelImage.IsVisible = true;
     }
@@ -211,7 +211,7 @@ public partial class PlayPage : ContentPage
     {
         CharacterImage.Opacity = 0;
         if (!direction)
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i <= 100; i++)
             {
                 await Task.Delay(1);
                 CharacterImage.Opacity = i / 100.0;
@@ -232,8 +232,11 @@ public partial class PlayPage : ContentPage
             status = 0;
         if (node.character != 0)
         {
+            CharacterImage.IsVisible = true;
             CharacterImage.Source = $"character_{node.character.ToString()}";
         }
+        else
+            CharacterImage.IsVisible = false;
 
         if (node.text_1 == "Далее" && (node.text_2 == "Далее\r" || node.text_2 == "Далее") && status > 0)
         {
@@ -249,14 +252,9 @@ public partial class PlayPage : ContentPage
         }
         if (prevCharacter != node.character)
         {
-            if (node.character == 0)
+            prevCharacter = node.character;
+            if (node.character != 0)
             {
-                prevCharacter = node.character;
-                AnimatedImage(true);
-            }
-            else
-            {
-                prevCharacter = node.character;
                 AnimatedImage(false);
             }
         }
@@ -291,7 +289,7 @@ public partial class PlayPage : ContentPage
         else
         {
             downloadText = node.question;
-            if (storyIndex == 14 || storyIndex == 20)
+            if (storyIndex == 14 || storyIndex == 38)
             {
                 ChoiceLeft.IsVisible = true;
                 ChoiceLeft.IsEnabled = true;
