@@ -1,4 +1,5 @@
 using MagicBookProject.ViewModel;
+using Microsoft.Maui.Devices.Sensors;
 //using MetalPerformanceShaders;
 
 namespace MagicBookProject;
@@ -141,11 +142,11 @@ public partial class PlayPage : ContentPage
         string Data = await ReadTextFile("evening.txt");
         string[] DataFromFile = Data.Split('\n');
 
-        List<string> Text= new List<string> { };
-        string Text_1 = "", Text_2 = "", Question="";
+        List<string> Text = new List<string> { };
+        string Text_1 = "", Text_2 = "", Question = "";
         int Index = 0, Background = 0, Character = 0;
 
-        for (int i=0; i<DataFromFile.Length; i+=3)
+        for (int i = 0; i < DataFromFile.Length; i += 3)
         {
             int.TryParse(DataFromFile[i], out Index);
             int.TryParse(DataFromFile[i + 1], out Background);
@@ -155,11 +156,11 @@ public partial class PlayPage : ContentPage
             {
                 Text.Add(DataFromFile[i]);
                 i++;
-                
+
             }
             i++;
             Question = DataFromFile[i];
-            string[] Elections = DataFromFile[i+1].Split('/');
+            string[] Elections = DataFromFile[i + 1].Split('/');
             Text_1 = Elections[0];
             Text_2 = Elections[1];
             TreeStory.AddNode(Index, Question, Text, Character, Text_1, Text_2, Background);
@@ -231,7 +232,7 @@ public partial class PlayPage : ContentPage
             }
     }
     private async void AnimatedText(Label text) //status: 0 - text, 1-question
-	{
+    {
         Node? node = TreeStory.FindNode(storyIndex);
         string downloadText;
         string characterName = characterNames[node.character];
@@ -287,13 +288,13 @@ public partial class PlayPage : ContentPage
             if (counter == 0)
                 leverlever = true;
             downloadText = node.text[index];
-            if(downloadText=="Я проснулся.\r" && storyIndex==0)
+            if (downloadText == "Я проснулся.\r" && storyIndex == 0)
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Flashlight.TurnOnAsync();
+                    await Flashlight.TurnOnAsync();
                     await Task.Delay(10);
-                    Flashlight.TurnOffAsync();
+                    await Flashlight.TurnOffAsync();
                 }
                 Vibration.Vibrate(100);
             }
@@ -330,9 +331,9 @@ public partial class PlayPage : ContentPage
         }
 
         if (lever)
-		{
+        {
             buttonFlag = false;
-			text.Text = string.Empty;
+            text.Text = string.Empty;
             foreach (char c in downloadText)
             {
                 if (lever)
@@ -363,17 +364,21 @@ public partial class PlayPage : ContentPage
             buttonFlag = true;
         }
     }
-	private async void OnImageTapped(object sender, EventArgs e)
-	{
-		if (sender is Image image)
-		{
-			var text = (Label)image.Parent.FindByName("MainText");
-			AnimatedText(text);
-		}
-	}
+    private async void OnImageTapped(object sender, EventArgs e)
+    {
+        if (IsCoolFeatureComplete == 1)
+            return;
+        if (sender is Image image)
+        {
+            var text = (Label)image.Parent.FindByName("MainText");
+            AnimatedText(text);
+        }
+    }
 
     private void leftChoiceClicked(object sender, EventArgs e)
     {
+        if (IsCoolFeatureComplete == 1)
+            return;
         status++;
         if (!buttonFlag)
             return;
@@ -389,10 +394,12 @@ public partial class PlayPage : ContentPage
         AnimatedText(text);
         Vibration.Vibrate(100);
     }
+    int IsCoolFeatureComplete = 0;
 
     private void rightChoiceClicked(object sender, EventArgs e)
     {
-
+        if (IsCoolFeatureComplete == 1)
+            return;
         status++;
         if (!buttonFlag)
             return;
@@ -405,7 +412,48 @@ public partial class PlayPage : ContentPage
             File.Create($"{mainDir}/save.txt").Close();
         WriteTextToFile(storyIndex.ToString(), "save.txt");
         var text = (Label)MainText;
+        if (storyIndex == 40)
+        {
+            if (IsCoolFeatureComplete != 2)
+            {
+                IsCoolFeatureComplete = 1;
+                ToggleAccelerometer();
+                return;
+            }
+        }
         AnimatedText(text);
         Vibration.Vibrate(100);
+    }
+
+    public void ToggleAccelerometer()
+    {
+        if (Accelerometer.Default.IsSupported)
+        {
+            if (!Accelerometer.Default.IsMonitoring)
+            {
+                // Turn on accelerometer
+                Accelerometer.Default.ReadingChanged += Accelerometer_ReadingChanged;
+                Accelerometer.Default.Start(SensorSpeed.UI);
+            }
+            else
+            {
+                // Turn off accelerometer
+                Accelerometer.Default.Stop();
+                Accelerometer.Default.ReadingChanged -= Accelerometer_ReadingChanged;
+            }
+        }
+    }
+
+    private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
+    {
+        // Update UI Label with accelerometer state
+        MainText.Text = $"{e.Reading}";
+        var text = (Label)MainText;
+        if (e.Reading.Acceleration.X < -0.9 && e.Reading.Acceleration.Y < 0.2)
+        {
+            ToggleAccelerometer();
+            IsCoolFeatureComplete = 2;
+            AnimatedText(text);
+        }
     }
 }
