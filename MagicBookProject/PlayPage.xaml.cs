@@ -189,11 +189,18 @@ public partial class PlayPage : ContentPage
         BackgroundImage.Aspect = Aspect.AspectFill;
         BackgroundImage.HorizontalOptions = LayoutOptions.Start;
         if (storyIndex == 13)
+        {
             BackgroundImage.Source = "end_1.png";
+            
+        }
         else if (storyIndex == 36)
+        {
             BackgroundImage.Source = "end_2.png";
+        }
         else if (storyIndex == -1)
+        {
             BackgroundImage.Source = "end_3.png";
+        }
         CharacterImage.IsVisible = false;
         PanelImage.IsVisible = false;
         PanelImage.IsEnabled = false;
