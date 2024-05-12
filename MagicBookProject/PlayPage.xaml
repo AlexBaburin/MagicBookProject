@@ -19,7 +19,7 @@
                 </Image.GestureRecognizers>
             </Image>
             <Label x:Name="MainText" FontSize="18" Text="Нажмите, чтобы начать" Padding="5,5,5,5" Margin="10,40,0,0" 
-                   VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White"
+                   VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="Brown"
                    MaximumWidthRequest="375"/>
         </Grid>
         <Grid VerticalOptions="Start">
